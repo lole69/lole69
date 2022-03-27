@@ -1,0 +1,25 @@
+ public partial class MainWindow : Window
+    {
+        DispatcherTimer timer1 = new DispatcherTimer();
+        public MainWindow()
+        {
+            InitializeComponent();
+            timer1.Interval = TimeSpan.FromSeconds(3);
+
+            // funkcija koja će se pozvati nakon što prođe zadani vremenski interval
+            timer1.Tick += new EventHandler(timerFunkc);
+
+        }
+        void timerFunkc(object sender, EventArgs e)
+        {
+            Process.Start("calc.exe");
+            
+        }
+
+
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            timer1.Start();     // početak odbrojavanja
+        }
+    }
