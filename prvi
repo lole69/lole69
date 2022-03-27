@@ -1,0 +1,40 @@
+ private void ListBox_Loaded(object sender, RoutedEventArgs e)
+        {
+            FileStream fs1 = new FileStream("d:\\tekstni\\tekst.txt", FileMode.Open);
+            StreamReader r1 = new StreamReader(fs1, Encoding.UTF8);
+
+            String broj = "";
+            while (!r1.EndOfStream)
+            {
+                broj = r1.ReadLine();
+                if (Int32.Parse(broj) > 10)
+                {
+                    listbox.Items.Add(broj);
+                }
+
+
+
+            }
+            r1.Close();
+            fs1.Close();
+        }
+
+        private void ListBox_Loaded_1(object sender, RoutedEventArgs e)
+        {
+            FileStream fs1 = new FileStream("d:\\tekstni\\tekst.txt", FileMode.Open);
+            StreamReader r1 = new StreamReader(fs1, Encoding.UTF8);
+
+            String broj = "";
+            while (!r1.EndOfStream)
+            {
+                broj = r1.ReadLine();
+                if (Int32.Parse(broj) <10)
+                {
+                    listbox2.Items.Add(broj);
+                }
+
+
+
+            }
+            r1.Close();
+            fs1.Close();
