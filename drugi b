@@ -1,0 +1,29 @@
+static void funkcijaFor()
+        {
+
+
+            FileStream fs1 = new FileStream("d:\\tekstni\\procesi.txt", FileMode.Open);
+            StreamWriter w1 = new StreamWriter(fs1, Encoding.UTF8);
+
+
+            Process[] procesi;
+
+            procesi = Process.GetProcesses();
+
+
+            for (int i = 0; i < procesi.Length; i++)
+            {
+                w1.WriteLine(procesi[i].ProcessName);
+            }
+            w1.Flush();
+            w1.Close();
+            fs1.Close();
+        }
+
+        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        {
+            Thread thr1 = new Thread(funkcijaFor);
+
+            thr1.Start();   // startanje svake pojedine niti
+            thr1.Join();	// čekanje svih niti da završe
+        }
