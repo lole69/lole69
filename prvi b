@@ -1,0 +1,20 @@
+private void ListBox_Loaded(object sender, RoutedEventArgs e)
+        {
+            FileStream fs1 = new FileStream("d:\\tekstni\\treci.txt", FileMode.Open);
+            StreamReader r1 = new StreamReader(fs1, Encoding.UTF8);
+
+            String priv = "";
+            int suma = 0;
+            int umno = 1;
+            
+            while (!r1.EndOfStream)
+            {
+                priv = r1.ReadLine();
+                listbox.Items.Add(priv);
+                umno = umno * int.Parse(priv);
+                suma = suma + int.Parse(priv);
+            }
+            label1.Content = suma;
+            label2.Content = umno;
+
+        }
