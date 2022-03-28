@@ -1,0 +1,62 @@
+package com.example.myapplication;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.Toast;
+
+import java.util.Random;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    }
+    int priv;
+    public void onGumbClick(View v) {
+        String poruka="";
+        EditText editText = (EditText) findViewById(R.id.edittext1);
+        int x = Integer.parseInt(editText.getText().toString());
+        CheckBox check1 = (CheckBox) findViewById(R.id.check1);
+        CheckBox check2 = (CheckBox) findViewById(R.id.check2);
+        RadioButton radio1 = (RadioButton) findViewById(R.id.radio1);
+        RadioButton radio2 = (RadioButton) findViewById(R.id.radio2);
+
+
+        if(check2.isChecked()==true){
+            poruka=poruka +"kvadrat: "+(x*x)+"  ";
+        }
+        if(check1.isChecked()==true){
+            if(radio1.isChecked()==true){
+                for(int i=0;true;i++){
+                    Random rand = new Random();
+                    priv=rand.nextInt(((x*x)-x))+x;
+                    if(priv%2==0){
+                        poruka=poruka+"rand"+priv;
+                        break;
+                    }
+                }
+            }
+            if(radio2.isChecked()==true){
+                for(int i=0;true;i++){
+                    Random rand = new Random();
+                    priv=rand.nextInt(((x*x)-x))+x;
+                    if(priv%2!=0){
+                        poruka=poruka+"rand"+priv;
+                        break;
+                    }
+                }
+            }
+
+        }
+
+        Toast.makeText(this, ""+poruka, Toast.LENGTH_SHORT).show();
+    }
+
+}
