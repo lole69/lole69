@@ -1,0 +1,45 @@
+public void onGumbClick(View v) {
+
+        EditText editText1 = (EditText) findViewById(R.id.edittext1);
+        EditText editText2 = (EditText) findViewById(R.id.edittext2);
+        CheckBox checkBox1 = (CheckBox) findViewById(R.id.checkBox1);
+        CheckBox checkBox2 = (CheckBox) findViewById(R.id.checkBox2);
+        CheckBox checkBox3 = (CheckBox) findViewById(R.id.checkBox3);
+        String st1 = editText1.getText().toString();
+        String st2 = editText2.getText().toString();
+        String poruka = "";
+        if(checkBox1.isChecked()==true) {
+            poruka = st1 + st2;
+        }
+        if(checkBox2.isChecked()==true) {
+            int broj = st1.length() + st2.length();
+             poruka += "\n" + broj;
+        }
+        if(checkBox3.isChecked()==true) {
+            if(st1.length()>st2.length()){
+                poruka += "\n" + st1;
+        }else if(st2.length()>st1.length()){
+                poruka += "\n" + st2;
+            } else {
+                poruka += st1;
+            }
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Odaberi duljinu:");
+            String finalPoruka = poruka;
+            builder.setItems(R.array.toast_duljina, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    switch (which) {
+                        case 0:
+                            Toast.makeText(((AlertDialog)dialog).getContext(), finalPoruka, Toast.LENGTH_LONG).show();
+                            break;
+                        case 1:
+                            Toast.makeText(((AlertDialog)dialog).getContext(), finalPoruka, Toast.LENGTH_SHORT).show();
+                            break;
+                    }
+                }
+            });
+            builder.show();
+
+
+        }
