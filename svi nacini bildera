@@ -1,0 +1,131 @@
+package com.example.myapplication;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.DialogInterface;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    }
+    int broj=0;
+
+    public void onGumbClick(View v) {
+        TextView textview1 = (TextView) findViewById(R.id.textview1);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Odaberi boju:");
+        builder.setItems(R.array.odabir_boja, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+
+                switch (which) {
+                    case 0:
+                        broj=broj-1;
+                        textview1.setText(""+broj);
+
+                        Toast.makeText(((AlertDialog)dialog).getContext(), "Zelena", Toast.LENGTH_SHORT).show();
+                        break;
+                    case 1:
+                        broj=broj+1;
+                        textview1.setText(""+broj);
+
+                        break;
+                    case 2:
+                        broj=broj+2;
+                        textview1.setText(""+broj);
+
+                        break;
+                }
+            }
+
+        });
+        builder.show();
+    }
+    int sel=0;
+    final CharSequence poljeNazivi[] = { "-1", "+1", "+2" };
+
+    public void onGumbClick2(View view) {
+        TextView textview1 = (TextView) findViewById(R.id.textview1);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Odaberi:");
+
+        builder.setSingleChoiceItems(poljeNazivi, sel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                sel = id;
+                Toast.makeText(((AlertDialog)dialog).getContext(), "Item", Toast.LENGTH_SHORT).show();
+            }});
+        builder.setPositiveButton("Fire", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                if(sel==0){
+                    broj=broj-1;
+                    textview1.setText(""+broj);
+
+                }
+                if (sel==1){
+                    broj=broj+1;
+                    textview1.setText(""+broj);
+
+                }
+                if(sel==2){
+                    broj=broj+2;
+                    textview1.setText(""+broj);
+
+                }
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+            }
+        });
+        builder.show();
+    }
+
+    boolean odabrano[] = {false, false, false};
+    final CharSequence poljeNazivi2[] = { "-1", "+1", "+2" };
+
+    public void onGumbClick3(View view) {
+        TextView textview1 = (TextView) findViewById(R.id.textview1);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Odaberi:");
+
+        builder.setMultiChoiceItems(poljeNazivi2, odabrano, new DialogInterface.OnMultiChoiceClickListener() {
+            public void onClick(DialogInterface dialog, int id, boolean b) {
+                Toast.makeText(((AlertDialog)dialog).getContext(), "Item", Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.setPositiveButton("Fire", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+               if(odabrano[0]==true){
+                   broj=broj-1;
+                   textview1.setText(""+broj);
+               }
+                if(odabrano[1]==true){
+                    broj=broj+1;
+                    textview1.setText(""+broj);
+                }
+                if(odabrano[2]==true){
+                    broj=broj+2;
+                    textview1.setText(""+broj);
+                }
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+            }
+        });
+        builder.show();
+    }
+
+
+}
