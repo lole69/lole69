@@ -1,0 +1,132 @@
+package com.example.vezbazakocisatest;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.TextView;
+
+public class MainActivity extends AppCompatActivity {
+
+
+
+
+    @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_main);
+
+
+
+
+        String[] items = new String[100];
+            for (int i=0; i<100; i++) { items[i]=""+(i+1); }
+        String[] items2 = new String[100];
+        for (int i=0; i<100; i++) { items2[i]=""+(i+1); }
+
+            Spinner spinner = (Spinner) findViewById(R.id.spinner_broj);
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                    android.R.layout.simple_spinner_dropdown_item, items);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinner.setAdapter(adapter);
+
+        Spinner spinner2 = (Spinner) findViewById(R.id.spinner_broj2);
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this,
+               android.R.layout.simple_spinner_dropdown_item, items2);
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+       spinner2.setAdapter(adapter2);
+
+
+
+            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+                public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                }    // simple Spinner zapravo sadrži veći broj TextView-a
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
+
+        spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+            }    // simple Spinner zapravo sadrži veći broj TextView-a
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        }
+    public void onGumbClick(View v) {
+        Spinner spinner = (Spinner) findViewById(R.id.spinner_broj);
+        Spinner spinner2 = (Spinner) findViewById(R.id.spinner_broj2);
+
+        TextView textview1 = (TextView) findViewById(R.id.textview1);
+        String prvi1= spinner.getSelectedItem().toString();
+        String prvi2= spinner2.getSelectedItem().toString();
+        int pr1=Integer.valueOf(prvi1);
+        int pr2=Integer.valueOf(prvi2);
+        int zbroj=pr1+pr2;
+
+
+        textview1.setText(""+prvi1+"+"+prvi2+"="+zbroj);
+    }
+
+
+}
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_alignParentTop="true"
+    android:background="#ffffff">
+
+
+<Spinner android:id="@+id/spinner_broj"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#bae8fc"/>
+
+
+
+
+
+
+    <Spinner android:id="@+id/spinner_broj2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#bae8fc"/>
+
+    <Button
+        android:id="@+id/gumb1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#ffcc00"
+        android:onClick="onGumbClick"
+        android:text="Gumb"
+        />
+    <TextView
+        android:id="@+id/textview1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ovo je TextView"
+        android:fontFamily="Ariel"
+        android:textColor="#F42A02"
+        android:background="#C8FE2E"
+        android:singleLine="true"
+        android:textSize="40sp"
+        />
+
+
+
+
+
+</LinearLayout>
