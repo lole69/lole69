@@ -1,0 +1,137 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText android:id="@+id/edit_message1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText android:id="@+id/edit_message2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button android:id="@+id/buttonSend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="saljiPoruku"
+        android:text="Press" />
+
+    <Button android:id="@+id/buttonSend1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="saljiPoruku1"
+        android:text="zbroj" />
+    <Button android:id="@+id/buttonSend2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="saljiPoruku2"
+        android:text="oduzmi" />
+
+
+</LinearLayout>
+package com.example.drugiactivity;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+
+public class MainActivity extends Activity {
+
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    }
+
+
+
+
+    public void saljiPoruku(View view) {
+
+        EditText editText1 = (EditText) findViewById(R.id.edit_message1);
+        EditText editText2 = (EditText) findViewById(R.id.edit_message2);
+
+        String message1 = editText1.getText().toString();
+        String message2 = editText2.getText().toString();
+
+
+        Intent intent = new Intent(this, Activity2.class);
+        intent.putExtra("PORUKA1", message1);   // slanje podataka
+        intent.putExtra("PORUKA2", message2);   // slanje podataka
+
+        startActivity(intent);
+    }
+
+
+    public void saljiPoruku1(View view) {
+
+        EditText editText1 = (EditText) findViewById(R.id.edit_message1);
+        EditText editText2 = (EditText) findViewById(R.id.edit_message2);
+
+        String message1 = editText1.getText().toString();
+        String message2 = editText2.getText().toString();
+
+        String poruka1=message1+"+"+message2+"="+(Integer.parseInt(message1)+Integer.parseInt(message2));
+
+
+
+        Intent intent = new Intent(this, Activity2.class);
+        intent.putExtra("PORUKA3", poruka1);   // slanje podataka
+
+        startActivity(intent);
+    }
+
+    public void saljiPoruku2(View view) {
+        EditText editText1 = (EditText) findViewById(R.id.edit_message1);
+        EditText editText2 = (EditText) findViewById(R.id.edit_message2);
+
+        String message1 = editText1.getText().toString();
+        String message2 = editText2.getText().toString();
+
+        String poruka2=message1+"-"+message2+"="+(Integer.parseInt(message1)-Integer.parseInt(message2));
+
+
+
+        Intent intent = new Intent(this, Activity2.class);
+        intent.putExtra("PORUKA3", poruka2);   // slanje podataka
+
+        startActivity(intent);
+    }
+}
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView android:id="@+id/viewText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>
+
+package com.example.drugiactivity;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.TextView;
+
+public class Activity2 extends Activity {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.layout_activity2);
+
+        Intent intent = getIntent();
+        String message1 = intent.getStringExtra("PORUKA1");
+        String message2 = intent.getStringExtra("PORUKA2");
+        String poruka1 = intent.getStringExtra("PORUKA3");
+
+
+
+        TextView textView = (TextView)findViewById(R.id.viewText);
+        textView.setText(""+poruka1);
+    }
+}
+
